@@ -8,7 +8,9 @@ a = input()
 
 b = a.split(', ') # ', '로 항목 구분
 
-c = [int(i) for i in (b)] # 정수형 변환
+c = [int(i) for i in b] # 정수형 변환
+
+# c = [int(i) for i in a.split(', ')]
 
 # for i in b:
 #     digit = int(i)
