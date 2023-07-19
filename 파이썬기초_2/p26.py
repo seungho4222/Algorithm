@@ -2,22 +2,35 @@
 
 class Student:
     
-    def __init__(self):
-        self.__name = "홍길동"
+    def __init__(self, name):
+        self.__name = name  # private 설정
     
     @property
     def name(self):
         return self.__name
+    
+    def output(self):
+        return f'이름: {self.name}'
 
 
-class GraduateStudent:
+class GraduateStudent(Student):
+    
+    def __init__(self, name, major):
+        super().__init__(name)
+        self.__major = major
 
-    pass
-        
-a = Student()
+    @property
+    def major(self):
+        return self.__major
+    
+    def output(self):
+        return super().output() + f', 전공: {self.major}'
+    
+Student1 = Student('홍길동')
+Student2 = GraduateStudent('이순신', '컴퓨터')
+print(Student1.output())
+print(Student2.output())
 
-
-print(f'이름: {a.name}')
 
 # 이름: 홍길동
 # 이름: 이순신, 전공: 컴퓨터
