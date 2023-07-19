@@ -2,20 +2,22 @@
 
 class Student:
     
+    def __init__(self):
+        self.__name = "홍길동"
+    
     @property
     def name(self):
-        return self.name
-    
-    def print_info(self):
-        print(f'이름: {self.name}')
+        return self.__name
 
 
 class GraduateStudent:
 
     pass
         
+a = Student()
 
 
+print(f'이름: {a.name}')
 
 # 이름: 홍길동
 # 이름: 이순신, 전공: 컴퓨터
