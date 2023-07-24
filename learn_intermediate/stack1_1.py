@@ -17,10 +17,16 @@ import sys
 sys.stdin = open('input.txt', 'r')
 
 
+def origami(h):
+    if h == 1:
+        return 1
+    elif h == 2:
+        return 3
+    return origami(h-1) + origami(h-2) * 2
+
+
 T = int(input())  # 테스트 케이스 개수
 for test_case in range(1, T + 1):
     N = int(input())
-    matrix = [[0] * int(N / 10) for i in range(2)]
-    
-    
-    print(f'#{test_case} {matrix}')
+    n = N // 10
+    print(f'#{test_case} {origami(n)}')
