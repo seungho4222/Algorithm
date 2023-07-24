@@ -18,13 +18,18 @@ sys.stdin = open('input.txt', 'r')
 
 T = int(input())  # 테스트 케이스 개수
 for test_case in range(1, T + 1):
-    N, M = map(int, input().split())
+    N, M = map(int, input().split())        # N x N 글자판, 회문길이 M
     matrix = [input() for i in range(N)]
 
-    
-    for str in matrix:
-        if list(str) == list(reversed(str)):
-            print(f'#{test_case}', str)
-            break
-
-    
+    for row in matrix:                                  # 가로열 회문 확인
+        for i in range(len(row) - M + 1):               # 가로열 내 회문 길이만큼 반복 체크
+            if row[i:M+i] == row[i:M+i][::-1]:          # 회문 체크
+                print(f'#{test_case}', row[i:M+i])
+        
+    for r in range(N):                                  # 세로열 회문 확인
+        column = ''
+        for c in range(N):
+            column += matrix[c][r]                      # 세로열 문자 생성
+        for i in range(len(column) - M + 1):            # 세로열 내 회문 길이만큼 반복 체크
+            if column[i:M+i] == column[i:M+i][::-1]:    # 회문 체크
+                print(f'#{test_case}', column[i:M+i])
