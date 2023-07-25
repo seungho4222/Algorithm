@@ -17,11 +17,15 @@ import sys
 
 sys.stdin = open('input.txt', 'r')
 
+
 def line_move():
     global start
     for x in line:
         if x[0] == start:
             start = x[1]
+            x[0], x[1] = x[1], x[0]
+            line.remove(x)
+            line.append(x)
             break
 
 
