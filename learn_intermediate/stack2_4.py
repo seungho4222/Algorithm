@@ -22,7 +22,7 @@ sys.stdin = open('input.txt', 'r')
 def section_sum(idx, total):
     global answer
 
-    if idx == N:        # N개 합, 최소값 비교
+    if idx == N:        # N개 합과 최소값 비교
         if total < answer:
             answer = total
             return
@@ -30,17 +30,17 @@ def section_sum(idx, total):
     if total > answer:  # 최소값보다 커지면 바로 스킵
         return
 
-    for i in range(N):      # 
+    for i in range(N):      # 시작 행 번호
         if i not in visited:
-            visited.append(i)
-            section_sum(idx+1, total+matrix[idx][i])
-            visited.pop()
+            visited.append(i)   # 방문기록 (중복열 방지)
+            section_sum(idx+1, total+matrix[idx][i])    # 재귀함수로 다음 행 번호 추출
+            visited.pop()   # N개 합 반환 후, 방문기록 반환
 
 T = int(input())
 for tc in range(1, T+1):
     N = int(input())
     matrix = [list(map(int, input().split())) for _ in range(N)]
     answer = 30
-    visited = []
-    section_sum(0, 0)
+    visited = []    # 방문기록 이 N개가 되면 그 원소들이 matrix의 행별 열값
+    section_sum(0, 0)   # 0행(첫번째행)부터 시작, 토탈값 초기화후 시작
     print('#{} {}'.format(tc, answer))
