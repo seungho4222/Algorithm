@@ -18,16 +18,29 @@ import sys
 
 sys.stdin = open('input.txt', 'r')
 
+# other
+def section_sum(idx, total):
+    global answer
 
-T = int(input())  # 테스트 케이스 개수
-for tc in range(1, T + 1):
+    if idx == N:        # N개 합, 최소값 비교
+        if total < answer:
+            answer = total
+            return
+
+    if total > answer:  # 최소값보다 커지면 바로 스킵
+        return
+
+    for i in range(N):      # 
+        if i not in visited:
+            visited.append(i)
+            section_sum(idx+1, total+matrix[idx][i])
+            visited.pop()
+
+T = int(input())
+for tc in range(1, T+1):
     N = int(input())
-    arr = [list(map(int, input().split())) for i in range(N)]
-    arr_sum = []
-
-    for i in arr[0]:
-
-    
-
-        ...
-
+    matrix = [list(map(int, input().split())) for _ in range(N)]
+    answer = 30
+    visited = []
+    section_sum(0, 0)
+    print('#{} {}'.format(tc, answer))
