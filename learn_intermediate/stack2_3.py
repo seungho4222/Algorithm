@@ -19,11 +19,124 @@ import sys
 
 sys.stdin = open('input.txt', 'r')
 
+# other
+def win(i, j):              # 가위바위보
+    if arr[i] == arr[j]:    # 비긴 경우
+        return i
+    elif arr[i] == 1:       # 가위를 낸 경우
+        if arr[j] == 2:     # 가위 vs 바위
+            return j
+        else:               # 가위 vs 보
+            return i
+    elif arr[i] == 2:       # 바위를 낸 경우
+        if arr[j] == 1:     # 바위 vs 가위
+            return i
+        else:               # 바위 vs 보
+            return j
+    else:                   # 보를 낸 경우
+        if arr[j] == 1:     # 보 vs 가위
+            return j
+        else:               # 보 vs 바위
+            return i
 
-T = int(input())  # 테스트 케이스 개수
-for tc in range(1, T + 1):
+
+def tournament(i, j):   # 대진 짜기
+    if i == j:            # 1명 남았을 경우 => 가위바위보 하러 간다
+        return i
+    else:               # 조 편성하기
+        left = tournament(i, (i+j)//2)
+        right = tournament((i+j)//2+1, j)
+        return win(left, right)
+
+
+T = int(input())
+for tc in range(1, 1 + T):
+    N = int(input())
+    arr = [0] + list(map(int, input().split()))
+    print(f'#{tc} {tournament(1, N)}')
+
+
+
+# # me
+# def game(x, y):
+#     if x[1] == 1:
+#         if y[1] == 1 or y[1] == 3:
+#             return x
+#         else:
+#             return y
+#     elif x[1] == 2:
+#         if y[1] == 1 or y[1] == 2:
+#             return x
+#         else:
+#             return y
+#     elif x[1] == 3:
+#         if y[1] == 2 or y[1] == 3:
+#             return x
+#         else:
+#             return y
+        
+
+# T = int(input())  # 테스트 케이스 개수
+# for tc in range(1, T + 1):
+#     N = int(input())
+#     card = list(enumerate((map(int, input().split())), 1))
     
+#     while True:
+#         if len(card) == 2:  
+#             print(f'#{tc} {game(card[0], card[1])[0]}')
+#             break
+
+#         group1 = card[:len(card)//2]
+#         group2 = card[len(card)//2:]
+#         del card[:]
+
+#         if len(group1) % 2 == 0:
+#             for i in range(0,len(group1)//2,2):
+#                 card.append(game(group1[i], group1[i+1]))
+#         else:
+#             for i in range(0,len(group1)//2,2):
+#                 card.append(game(group1[i], group1[i+1]))
+#             card.append(group1[-1])
+
+#         if len(group2) % 2 == 0:
+#             for i in range(0,len(group2)//2,2):
+#                 card.append(game(group2[i], group2[i+1]))
+#         else:
+#             for i in range(0,len(group2)//2,2):
+#                 card.append(game(group2[i], group2[i+1]))
+#             card.append(group2[-1])
+
+
+# # chatGPT
+# def game(x, y):
+#     if x[1] == y[1]:  # 비긴 경우는 번호가 작은 카드를 반환
+#         return x if x[0] < y[0] else y
+#     elif x[1] == 1:  # 가위
+#         return x if y[1] == 3 else y
+#     elif x[1] == 2:  # 바위
+#         return x if y[1] == 1 else y
+#     elif x[1] == 3:  # 보
+#         return x if y[1] == 2 else y
+
+# T = int(input())  # 테스트 케이스 개수
+# for tc in range(1, T + 1):
+#     N = int(input())
+#     card = list(enumerate((map(int, input().split())), 1))
     
-    
-    
-    ...
+#     while True:
+#         if len(card) == 2:  
+#             print(f'#{tc} {game(card[0], card[1])[0]}')
+#             break
+
+#         next_round = []
+#         if len(card) % 2 == 0:
+#             for i in range(0, len(card), 2):
+#                 winner = game(card[i], card[i+1])
+#                 next_round.append(winner)
+#         else:
+#             for i in range(0, len(card)-1, 2):
+#                 winner = game(card[i], card[i+1])
+#                 next_round.append(winner)
+#             next_round.append(card[-1])
+
+#         card = next_round
