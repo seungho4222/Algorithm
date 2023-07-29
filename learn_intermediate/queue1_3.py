@@ -19,5 +19,20 @@ sys.stdin = open('input.txt', 'r')
 
 T = int(input())
 for tc in range(1, T+1):
-    N, M = map(int, input().split())
-    ...
+    N, M = map(int, input().split())            # 화덕 내 최대 피자: N, 피자개수: M
+    Ci = map(int, input().split())              # 피자위 치즈양
+    pizza = list(map(list, enumerate(Ci, 1)))   # 피자 번호 부여
+    bake = [pizza.pop(0) for i in range(N)]     # N만큼 화덕 넣기
+    
+    while len(bake) != 1:                       # 피자 1개 남을때까지
+        if bake[0][1] != 0:                     # 치즈 양이 0이 아니면
+            bake[0][1] //= 2                    # 반으로 줄이고
+            bake.append(bake.pop(0))            # 뒤로 보내기
+        else:
+            bake.pop(0)                         # 치즈 0이면 피자 빼기
+            if pizza:                           # 남은 피자가 있으면
+                pizza[0][1] //= 2               # 치즈 반으로 줄이고 넣기
+                bake.append(pizza.pop(0))       # -> 치즈양이 0이 아니면 반으로 줄이고 뒤로 보내기때문!!
+    
+    print(f'#{tc} {bake[0][0]}')
+
