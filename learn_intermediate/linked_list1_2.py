@@ -71,7 +71,7 @@ sys.stdin = open('input.txt', 'r')
 #             seq = save
 #             return
 
-
+# 시간초과
 # def insert_seq():
 #     global seq
 #     new_seq = list(map(int, input().split()))
@@ -91,37 +91,53 @@ sys.stdin = open('input.txt', 'r')
 #         else:
 #             break
 
+# 시간초과
+# def insert_seq():
+#     global seq
+#     new_seq = list(map(int, input().split()))
 
-def insert_seq():
-    global seq
-    new_seq = list(map(int, input().split()))
+#     if new_seq[0] >= max(seq):
+#         seq.extend(new_seq)
+#         return
 
-    if new_seq[0] >= max(seq):
-        seq.extend(new_seq)
-        return
+#     seq_clone = [(0, new_seq[0])] + list(enumerate(seq))
+#     sort_seq = list(sorted(seq_clone, key=lambda x:x[1], reverse=True))
+#     a = sort_seq[:sort_seq.index((0, new_seq[0]))]
+#     b = list(sorted(a))
+#     index = b[0][0]
 
-    seq_clone = [(0, new_seq[0])] + list(enumerate(seq))
-    sort_seq = list(sorted(seq_clone, key=lambda x:x[1], reverse=True))
-    a = sort_seq[:sort_seq.index((0, new_seq[0]))]
-    b = list(sorted(a))
-    index = b[0][0]
-
-    save = []
+#     save = []
     
-    save.extend(seq[:index])
-    save.extend(new_seq)
-    save.extend(seq[index:])
-    seq = save
-    return
+#     save.extend(seq[:index])
+#     save.extend(new_seq)
+#     save.extend(seq[index:])
+#     seq = save
+#     return
 
+
+# T = int(input())
+# for tc in range(1, T+1):
+#     N, M = map(int, input().split())
+#     seq = list(map(int, input().split()))
+
+#     for i in range(M-1):
+#         insert_seq()
+
+#     print(f'#{tc}', end=' ')
+#     print(*seq[-1:-11:-1])
 
 
 T = int(input())
-for tc in range(1, T+1):
+for tc in range(1,T+1):
     N, M = map(int, input().split())
-    seq = list(map(int, input().split()))
-
-    for i in range(M-1):
-        insert_seq()
-
-    print(f'#{tc} {seq[-1:-11:-1]}')
+    arr = [float('inf')]
+    cnt = 0
+    for _ in range(M):
+        a = list(map(int, input().split()))
+        for i in range(N*cnt+1):
+            if a[0] < arr[i]:
+                arr[i:i] = a
+                break
+        cnt +=  1
+    print(f'#{tc}',end=' ')
+    print(*arr[-11:-1][::-1])
