@@ -18,10 +18,31 @@ import sys
 sys.stdin = open('input.txt', 'r')
 
 
+def node_check():       # 연결된 노드 체크 함수
+    global stack        # 함수 내 stack 변경 가능하게끔
+    count = 1           # stack에 담긴 값이 이미 한번 연결된 노드
+    while stack:
+        save = []       # BFS용 중간 저장소
+        while stack:
+            link = stack.pop()      # stack에서 하나씩 확인
+            if link[1] == G:        # 도착시 리턴
+                return count
+            for i in line:          # pop한 값 연결노드 있는지 확인
+                if link[1] == i[0]:     # 노드 끝점, 시작점 비교
+                    save.append(i)
+                elif link != i and link[1] == i[1]:   # 노드 끝점, 끝점 비교
+                    save.append(list(reversed(i)))      # 순서 바꿔서 스택
+                    line.remove(i)          # 출구 없을 경우 while문 무한 반복 방지
+        count += 1
+        stack = save    # 동일 카운트 모두 확인 후 stack 재탐색
+    return 0
+
+
 T = int(input())
 for tc in range(1, T+1):
-    V, E = map(int, input().split())
-    line = [list(map(int, input().split())) for i in range(E)]
-    S, G = map(int, input().split())
+    V, E = map(int, input().split())    # 노드 개수: V, 간선개수: E
+    line = [list(map(int, input().split())) for i in range(E)]      # 간선 노드정보
+    S, G = map(int, input().split())    # Start, Goal
 
-    print(line)
+    stack = [i for i in line if i[0] == S]      # Start 간선정보 스택
+    print(f'#{tc} {node_check()}')
