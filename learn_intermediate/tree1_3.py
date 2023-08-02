@@ -16,11 +16,11 @@ ans = 0
 def sum_tree(y):
     global ans
     while y:
-        parents = y // 2
-        if parents == 0:
-            break
-        ans += nodes[parents]
-        sum_tree(parents)
+        y = y // 2
+        if y == 0:
+            return
+        ans += nodes[y]
+        sum_tree(y)
     return ans
 
 T = int(input())
