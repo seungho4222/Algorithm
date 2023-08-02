@@ -12,16 +12,12 @@ def make_tree(x):
         make_tree(2*x + 1)
         tree.pop()
 
-ans = 0
 def sum_tree(y):
-    global ans
-    while y:
-        y = y // 2
-        if y == 0:
-            return
-        ans += nodes[y]
-        sum_tree(y)
-    return ans
+    y //= 2
+    if y == 0:
+        return 0
+    return nodes[y] + sum_tree(y)
+
 
 T = int(input())
 for tc in range(1, T+1):
@@ -30,5 +26,4 @@ for tc in range(1, T+1):
     tree = [0]
     make_tree(1)
 
-    print(f'#{tc}', sum_tree(N))
-    
+    print(f'#{tc} {sum_tree(N)}')
