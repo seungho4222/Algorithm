@@ -2,28 +2,26 @@ import sys
 
 sys.stdin = open('input.txt', 'r')
 
-
-def make_tree(x):
-    if x <= N:
-        tree.append(x)
-        if x > 1 and nodes[tree[-1]] < nodes[tree[-2]]:
-            nodes[tree[-1]], nodes[tree[-2]] = nodes[tree[-2]], nodes[tree[-1]]
-        make_tree(2*x)
-        make_tree(2*x + 1)
-        tree.pop()
-
-def sum_tree(y):
-    y //= 2
-    if y == 0:
-        return 0
-    return nodes[y] + sum_tree(y)
-
+# 최소힙 정렬
+def heapify_up(idx):
+    while idx > 1 and heap[idx] < heap[idx // 2]:
+        heap[idx], heap[idx // 2] = heap[idx // 2], heap[idx]
+        idx //= 2
 
 T = int(input())
-for tc in range(1, T+1):
+for tc in range(1, T + 1):
     N = int(input())
-    nodes = [0] + list(map(int, input().split()))
-    tree = [0]
-    make_tree(1)
+    nums = list(map(int, input().split()))
 
-    print(f'#{tc} {sum_tree(N)}')
+    heap = [0]  # 힙의 인덱스를 1부터 시작하기 위해 0 추가
+    for num in nums:
+        heap.append(num)
+        heapify_up(len(heap) - 1)
+
+    idx = N     # len(heap) - 1
+    ans = 0
+    while idx > 1:
+        idx //= 2
+        ans += heap[idx]
+
+    print(f'#{tc} {ans}')
