@@ -13,17 +13,13 @@ for i in deco:
 
 # 중위순회
 in_order = []
-search1 = []
 def inorder(x):
     global in_order
-    global search1
     if x == -1 : return
-    search1 += [x]
     for j in node[x]:
-        if not j in search1:
-            inorder(j)
-            if x in in_order : return in_order
-            in_order += [x]
+        inorder(j)
+        if x in in_order : return in_order
+        in_order += [x]
     if x in in_order : return
     in_order += [x]
     return in_order
@@ -41,15 +37,11 @@ def preorder(x):
 
 # 후위순회
 post = []
-search2 = []
 def postorder(x):
     global post
-    global search2
     if x == -1 : return
-    search2 += [x]
     for j in node[x]:
-        if not j in search2:
-            postorder(j)
+        postorder(j)
     if x in post : return
     post += [x]
     return post
