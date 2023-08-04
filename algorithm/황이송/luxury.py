@@ -1,6 +1,6 @@
 import sys
 
-sys.stdin = open('in.txt', 'r')
+sys.stdin = open('input.txt', 'r')
 
 N = int(input())
 travel = [list(map(int, input().split())) for _ in range(N)]
@@ -30,13 +30,13 @@ def luxury(x):
         if min_cost > cost:
             min_cost = cost
         return
-    for k in range(N):  # 여행가능하면 비용 추가 -> 다음 여행지 순회
-        if travel[x][k] and k not in visited:
-            cost += travel[x][k]
-            luxury(k)
+    for c in range(N):  # 여행가능하면 비용 추가 -> 다음 여행지 순회
+        if travel[x][c] and c not in visited:
+            cost += travel[x][c]
+            luxury(c)
             # 방문지, 비용 스택 제거
             visited.pop()
-            cost -= travel[x][k]
+            cost -= travel[x][c]
     return
 
 luxury(S)
