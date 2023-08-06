@@ -7,10 +7,10 @@ def golf_road(x):
     global min_v
     global battery
     global visited
+    visited += [i]
     for i in range(N):
-        visited += [i]
         battery += road[x][i]
-        golf_road
+        golf_road(i)
 
 
 
