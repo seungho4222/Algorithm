@@ -17,12 +17,17 @@ def chess(r, x):
         return
     for i in range(r+1, N):
         for j in range(1, N):
+            # 세로열
             if arr[i][x] == 0:
                 arr[i][x] = 1
+            # 오른쪽 아래
             if r+j < N and x+j < N and arr[r+j][x+j] == 0:
                 arr[r+j][x+j] = 1
+            # 왼쪽 아래
             if r+j < N and 0 <= x-j and arr[r+j][x-j] == 0:
                 arr[r+j][x-j] = 1
+            # 왼쪽 위
+            # 오른쪽 위
     r += 1
     for k in range(N):
         chess(r,k)
