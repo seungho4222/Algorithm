@@ -9,14 +9,15 @@
 import sys
 sys.stdin = open('input.txt')
 
-
+# 디저트카페 탐색
+# x, y: 기준 좌표, path: 디저트 방문 기록, way: 델타 방향
 def dfs(x, y, path, way):
     global cnt, i, j
-
+    # 방향 3번 꺾고, 원점으로 돌아왔으면 값 비교
     if way == 3 and x == i and y == j and len(path) > 2:
         cnt = max(cnt, len(path))
         return
-
+    # 범위 내 방문안한 디저트면 체크
     if 0 <= x < N and 0 <= y < N and cafe[x][y] not in path:
         new_path = path + [cafe[x][y]]
         
@@ -35,10 +36,11 @@ T = int(input())
 for tc in range(1, T+1):
     N = int(input())
     cafe = [list(map(int, input().split())) for _ in range(N)]
-
+    # 오른쪽 아래, 왼쪽 아래, 왼쪽 위, 오른쪽 위
     dxy = [(1, 1), (1, -1), (-1, -1), (-1, 1)]
-
+    # 탐색 실패값 -1 시작
     cnt = -1
+    # 모든 행열 탐색
     for i in range(N):
         for j in range(N):
             dfs(i, j, [], 0)
