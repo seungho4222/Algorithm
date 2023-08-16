@@ -34,11 +34,6 @@ def dfs(cnt, start, film):
         if ans > cnt:
             ans = cnt
             return
-    # 투입최대횟수는 K이므로 !
-    if cnt == K:
-        if ans > cnt:
-            ans = cnt
-            return
     else:
         for i in range(start, D):
             switched = []
