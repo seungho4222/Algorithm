@@ -2,12 +2,13 @@ import sys
 
 sys.stdin = open('input.txt', 'r')
 
+
 def bfs(r, c, ans):
     global result
     if r == N-1 and c == N-1:
         if result > ans:
             result = ans
-            return
+        return
     if ans > result:
         return
     for d in range(2):
@@ -28,6 +29,6 @@ for tc in range(1, T+1):
     arr = [list(map(int, input().split())) for _ in range(N)]
     dr = [0, 1]
     dc = [1, 0]
-    result = float('inf')
+    result = 1e9
 
     print(f'#{tc} {bfs(0,0,0)}')
