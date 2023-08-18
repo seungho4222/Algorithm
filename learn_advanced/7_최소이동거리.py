@@ -6,6 +6,7 @@ sys.stdin = open('input.txt', 'r')
 def Dijkstra(s):
     # 시작지점 거리 0
     distance[s] = 0
+    # P = [-1] * (N+1) # 최단 경로 트리 저장
     # 노드(도로구간)만큼 반복
     for _ in range(N+1):
         # 현재 도로에서 가장 가까운 연결지점 찾기
@@ -23,6 +24,7 @@ def Dijkstra(s):
             if matrix[min_idx][i] and not visited[i]:
                 if distance[min_idx] + matrix[min_idx][i] < distance[i]:
                     distance[i] = distance[min_idx] + matrix[min_idx][i]
+                    # P[i] = min_idx # 최단 경로 트리 저장
     return distance[N]
 
 
