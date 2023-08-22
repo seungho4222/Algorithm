@@ -9,7 +9,7 @@ for tc in range(1, T+1):
         cur = A.pop()
         if cur[0] == 0:
             continue
-        # 한계친 계산 => 해당 단계가 유망한지 판단
+        # 한계치 계산 => 해당 단계가 유망한지 판단
         bound = cur[0]*(cur[0]+1)/2 + cur[1]
         # 한계치가 원소의 합보다 큰 경우
         if bound >= K:
