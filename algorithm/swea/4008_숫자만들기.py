@@ -1,7 +1,7 @@
 import sys
 sys.stdin = open('input.txt', 'r')
 
-# 백트랙킹
+# 완전탐색
 # calc(연산자 사용 횟수, 중간계산결과, 사용한 연산자 인덱스)
 def calc(op_idx, sum_v, op_visited):
     global max_v, min_v
