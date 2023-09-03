@@ -34,7 +34,7 @@ for i in range(R):  # 배열 입력 0: 물, 1: 빙판, 2: 백조
     for j in range(C):
         if inputs[j] == '.': stack.append((i,j))
         elif inputs[j] == 'X': arr[i][j] = 1
-        elif inputs[j] == 'L': arr[i][j] = 2; swan.append((i,j))
+        elif inputs[j] == 'L': arr[i][j] = 2; swan.append((i,j)); stack.append((i,j))
 temp = deque()  # 백조1이 갈 수 있는 경로 중 빙판마주치기전 좌표 저장
 swan_move = deque()  # 백조 1이 갈 수 있는 물 좌표 저장
 swan_move.append(swan[0])  # 백조1 위치에서 시작
