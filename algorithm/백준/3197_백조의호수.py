@@ -29,12 +29,12 @@ R, C = map(int, input().split())  # 행, 열 길이
 arr = [[0]*C for _ in range(R)]
 stack = deque()  # 물 위치
 swan = deque()  # 백조 위치
-for i in range(R):  # 배열 입력 0: 물, 1: 빙판, 2: 백조
+for i in range(R):  # 배열 입력 0: 물, 백조 1: 빙판
     inputs = list(input())
     for j in range(C):
         if inputs[j] == '.': stack.append((i,j))
         elif inputs[j] == 'X': arr[i][j] = 1
-        elif inputs[j] == 'L': arr[i][j] = 2; swan.append((i,j)); stack.append((i,j))
+        elif inputs[j] == 'L': swan.append((i,j)); stack.append((i,j))
 temp = deque()  # 백조1이 갈 수 있는 경로 중 빙판마주치기전 좌표 저장
 swan_move = deque()  # 백조 1이 갈 수 있는 물 좌표 저장
 swan_move.append(swan[0])  # 백조1 위치에서 시작
@@ -44,13 +44,12 @@ while swan_move:  # 처음 빙판 앞 좌표 찾기
     r, c = swan_move.popleft()
     if (r,c) == swan[1]:  # 처음에 백조 만났다!
         direct = 0
-        print(0)
         break
     for dr, dc in d:  # 이동하면서
         nr, nc = r+dr, c+dc
         if is_valid(nr,nc) and arr[nr][nc] == 1 and (r,c) not in temp:  # 빙판마주치기전 좌표 저장
             temp.append((r,c))
-        elif is_valid(nr, nc) and visited[nr][nc] == 0 and arr[nr][nc] != 1:  # 물이면 계속 이동
+        elif is_valid(nr, nc) and visited[nr][nc] == 0 and arr[nr][nc] == 0:  # 물이면 계속 이동
             visited[nr][nc] = 1
             swan_move.append((nr,nc))
 
@@ -70,7 +69,7 @@ if direct: # 처음에 못만남 => 첫째날부터 시작
             arr[r][c] = 0
         stack = new_stack  # 빙판스택 변경
         cnt += 1  # 다음날 진행
-    print(cnt)
+print(cnt)
 
 
 
