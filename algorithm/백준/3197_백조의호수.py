@@ -7,7 +7,7 @@ def is_valid(r, c):
     return 0 <= r < R and 0 <= c < C
 
 
-def swan_check():  # 빙판앞 좌표에서 탐색
+def swan_check():  # 백조1이 마주친 빙판 좌표에서 탐색
     global temp
     new_temp = deque()
     while temp:
@@ -59,11 +59,11 @@ cnt = 0
 if direct: # 처음에 못만남 => 첫째날부터 시작
     while True: 
         new_stack = deque()
-        while stack:  # 물위치에서 이동
+        while stack:  # 처음엔 물위치에서 탐색 / 다음부턴 녹은 빙판위치에서만 탐색
             i, j = stack.popleft()
             for dr, dc in d:
                 nr, nc = i+dr, j+dc
-                if is_valid(nr, nc) and arr[nr][nc] == 1:  # 빙판이면 좌표 저장
+                if is_valid(nr, nc) and arr[nr][nc] == 1:  # 빙판이면 녹이고 좌표 저장
                     arr[nr][nc] = 0
                     new_stack.append((nr,nc))
         stack = new_stack  # 빙판스택 변경
