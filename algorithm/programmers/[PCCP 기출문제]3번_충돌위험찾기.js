@@ -34,7 +34,7 @@ function solution(points, routes) {
 
   return Array.from(map.values()).filter((v) => v).length;
 }
-
+ 
 console.log(
   solution(
     [
