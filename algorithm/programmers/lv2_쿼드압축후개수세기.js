@@ -1,6 +1,6 @@
 /**
  * https://school.programmers.co.kr/learn/courses/30/lessons/68936
- * 프로그래머스 lv1 - 월간 코드 챌린지 시즌1
+ * 프로그래머스 lv2 - 월간 코드 챌린지 시즌1
  * 쿼드압축 후 개수 세기
  * @param {Number[][]} arr
  * @returns {Number[]}
@@ -42,7 +42,7 @@ function solution(arr) {
 
     return [cnt0, cnt1];
   };
-  
+
   return quadZip(0, 0, arr.length);
 }
 
